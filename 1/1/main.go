@@ -3,7 +3,6 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"log"
 	"os"
 	"strconv"
 )
@@ -34,24 +33,15 @@ import (
 // Of course, your expense report is much larger. Find the two entries that sum to 2020; what do you get if you multiply them together?
 
 func main() {
-	file, err := os.Open("../input.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
+	file, _ := os.Open("../input.txt")
 	defer file.Close()
 
 	numbers := []int{}
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
-		n, err := strconv.Atoi(scanner.Text())
-		if err != nil {
-			log.Fatal(err)
-		}
+		n, _ := strconv.Atoi(scanner.Text())
 		numbers = append(numbers, n)
-	}
-	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
 	}
 
 	for _, i := range numbers {
