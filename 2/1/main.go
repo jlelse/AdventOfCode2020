@@ -40,7 +40,7 @@ func main() {
 
 	passwords := []*password{}
 
-	inputRegex := regexp.MustCompile(`(?m)^(\d+)-(\d+) (\w): (\w+)$`)
+	inputRegex := regexp.MustCompile(`^(\d+)-(\d+) (\w): (\w+)$`)
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
