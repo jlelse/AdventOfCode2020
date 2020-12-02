@@ -38,24 +38,19 @@ func main() {
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		text := scanner.Text()
-		firstString := inputRegex.ReplaceAllString(text, "$1")
-		first, _ := strconv.Atoi(firstString)
-		secondString := inputRegex.ReplaceAllString(text, "$2")
-		second, _ := strconv.Atoi(secondString)
-		pw := &password{
+		first, _ := strconv.Atoi(inputRegex.ReplaceAllString(text, "$1"))
+		second, _ := strconv.Atoi(inputRegex.ReplaceAllString(text, "$2"))
+		passwords = append(passwords, &password{
 			first:    first,
 			second:   second,
 			letter:   inputRegex.ReplaceAllString(text, "$3"),
 			password: inputRegex.ReplaceAllString(text, "$4"),
-		}
-		passwords = append(passwords, pw)
+		})
 	}
 
 	correct := 0
 	for _, pw := range passwords {
-		firstChar := string(pw.password[pw.first-1])
-		secondChar := string(pw.password[pw.second-1])
-		if (firstChar == pw.letter && secondChar != pw.letter) || (firstChar != pw.letter && secondChar == pw.letter) {
+		if (string(pw.password[pw.first-1]) == pw.letter) != (string(pw.password[pw.second-1]) == pw.letter) {
 			correct++
 		}
 	}

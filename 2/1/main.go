@@ -45,17 +45,14 @@ func main() {
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		text := scanner.Text()
-		minString := inputRegex.ReplaceAllString(text, "$1")
-		min, _ := strconv.Atoi(minString)
-		maxString := inputRegex.ReplaceAllString(text, "$2")
-		max, _ := strconv.Atoi(maxString)
-		pw := &password{
+		min, _ := strconv.Atoi(inputRegex.ReplaceAllString(text, "$1"))
+		max, _ := strconv.Atoi(inputRegex.ReplaceAllString(text, "$2"))
+		passwords = append(passwords, &password{
 			min:      min,
 			max:      max,
 			letter:   inputRegex.ReplaceAllString(text, "$3"),
 			password: inputRegex.ReplaceAllString(text, "$4"),
-		}
-		passwords = append(passwords, pw)
+		})
 	}
 
 	correct := 0
